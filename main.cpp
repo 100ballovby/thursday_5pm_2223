@@ -6,7 +6,9 @@ int randint(int start, int end) {
     return num;
 }
 
+
 int main() {
+    return 0;
 }
 
 
