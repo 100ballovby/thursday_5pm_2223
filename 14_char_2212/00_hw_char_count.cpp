@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int hw_char_count() {
     // как записать текст с пробелами в char массив
     char phrase[100];
     char symbol;  // символ строки
@@ -13,6 +13,22 @@ int main() {
         i++;
     }
 
+    cout << phrase << endl;
+
+    int letters = 0, punct = 0, nums = 0;
+
+    for (int j = 0; j < strlen(phrase); j++) {
+        if (isdigit(phrase[j])) {
+            nums++;
+        } else if (isalpha(phrase[j])) {
+            letters++;
+        } else if (ispunct(phrase[j])) {
+            punct++;
+        }
+    }
+    cout << "Letters: " << letters << endl;
+    cout << "Punctuations: " << punct << endl;
+    cout << "Numbers: " << nums << endl;
     return 0;
 }
 
