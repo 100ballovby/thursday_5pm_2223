@@ -1,11 +1,10 @@
 #include <iostream>
+#include <string>
+#include <cmath>
 using namespace std;
 
-int main() {
-    char phrase[100];
-    cout << "Enter string, cancel with Enter: ";
-    cin.getline(phrase, 100);
 
+int main() {
     return 0;
 }
 
