@@ -19,6 +19,7 @@ int main() {
         switch (option) {
             case 1:
                 cout << "Login: "; cin >> login;
+                login = loginLowercase(login);
                 cout << "Password: "; cin >> password;
                 cout << "Confirm password: "; cin >> confirm;
 
@@ -32,6 +33,7 @@ int main() {
                 break;
             case 2:
                 cout << "Your login: "; cin >> login;
+                login = loginLowercase(login);
                 cout << "Your password: "; cin >> password;
                 log_status = isLoggedIn(login, password);
 
