@@ -5,11 +5,11 @@ using namespace std;
 
 // #### блок с функциями ###
 int menu();  // функция-кандидат (объявление функции)
-bool isLoggedIn(string *username, string password);
+bool isLoggedIn(string username, string password);
 bool userRegister(string *username, string *password, string *confirmation);
 
 int main() {
-    int option;
+    int option = 3;
     while (option != 0) {
         option = menu();
         switch (option) {
@@ -17,7 +17,16 @@ int main() {
                 cout << "Option 1" << endl;
                 break;
             case 2:
-                cout << "Option 2" << endl;
+                string login, password;
+                cout << "Your login: "; cin >> login;
+                cout << "Your password: "; cin >> password;
+                bool status = isLoggedIn(login, password);
+
+                if (status) {
+                    cout << "Login successful" << endl;
+                } else {
+                    cout << "Login or/and password is incorrect!" << endl;
+                }
                 break;
         }
     }
@@ -30,6 +39,31 @@ int menu() {
     int ans;  // объявление переменной
     cin >> ans;  // присвоение значения (инициализация)
     return ans;
+}
+
+
+bool isLoggedIn(string username, string password) {
+    string uname, passw;
+    ifstream read("../data/" + username + ".txt");  // Название файла data/architect.txt
+    getline(read, uname);
+    getline(read, passw);
+
+    read.close();
+
+    return uname == username && passw == password;
+}
+
+bool userRegister(string *username, string *password, string *confirmation) {
+    if (password == confirmation) {
+        ofstream file;
+        file.open("../data/" + *username + ".txt", ios::out);
+        file << username << endl << password;
+        file.close();
+        return true;
+    } else {
+        return false;
+    }
+
 }
 
 
