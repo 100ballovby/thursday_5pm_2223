@@ -1,45 +1,54 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <string>
 using namespace std;
 
+struct Student {
+    string name;
+    string address;
+    string group;
+    double rate;
+};
 
+void inputStudent(vector<Student> &studs);
+int searchStudent(vector<Student> &studs, string name);
 
 int main() {
-    int maximum = 0, minimum = 0, sum = 0, mult = 1;
-    vector<int> nums {4, 5, 12, 0, 43, 4, 2, 19, 32, -2, 5};
-    auto start { nums.begin() };
-    auto end { nums.end() };
-    for (auto ptr = start; ptr != end; ptr++) {
-        if (*ptr > maximum) {
-            maximum = *ptr;
-        }
-        if (*ptr < minimum) {
-            minimum = *ptr;
-        }
-        if (*ptr > 0) {
-            sum += *ptr;
-        }
-    }
+    vector<Student> students;
 
-    cout << "Max: " << maximum << endl;
-    cout << "Min: " << minimum << endl;
-    cout << "Sum: " << sum << endl;
 
-    // чтобы найти индекс определенного элемента в векторе (при условии его наличия) используем:
-    auto i_max = find(nums.begin(), nums.end(), maximum);
-    auto i_min = find(nums.begin(), nums.end(), minimum);
-
-    cout << "Max index: " << i_max - nums.begin() << endl;
-    cout << "Min index: " << i_min - nums.begin() << endl;
-
-    // чтобы получить ИНДЕКС найденного элемента, отнимите от значения функции find начало вектора
-    int s_l = i_max - nums.begin();
-    int f_l = i_min - nums.begin();
-
-    // цикл выбирает, с какого индекса ему начинать на основе работы функций max и min
-    for (int i = min(s_l, f_l); i < max(s_l, f_l); i++) {
-        mult *= nums[i];
-    }
-    cout << "Multiplication: " << mult << endl;
     return 0;
+}
+
+void inputStudent(vector<Student> &studs) {
+    Student *student = new Student;
+    cout << "Name: ";
+    getline(cin, student->name);
+    cout << "Address: ";
+    getline(cin, student->address);
+    cout << "Group: ";
+    getline(cin, student->group);
+    cout << "Rate: ";
+    cin >> student->rate;
+
+    studs.push_back(*student);
+}
+
+int searchStudent(vector<Student> &studs, string name) {
+    int index = 0;
+    bool found = false;
+    for (auto it = studs.begin(); it != studs.end(); it++) {
+        if (it->name == name) {
+            found = true;
+            break;
+        }
+        index++;
+    }
+
+    if (!found) {
+        return -1;
+    } else {
+        return index;
+    }
 }
